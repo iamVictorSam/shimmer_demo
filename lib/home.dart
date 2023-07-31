@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:shimmer_demo/product_shimmer.dart';
 
 import 'api_request.dart';
 import 'items.dart';
@@ -44,11 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : _buildProduct(),
+              isLoading ? _buildProductShimmer() : _buildProduct(),
             ],
           ),
         ),
@@ -56,17 +54,40 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _buildProductShimmer() => GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return Shimmer.fromColors(
+              baseColor: Colors.black54,
+              highlightColor: Colors.black12,
+              direction: ShimmerDirection.ttb,
+              period: const Duration(milliseconds: 800),
+              child: const ProductShimmer());
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          childAspectRatio: 1 / 2,
+        ),
+      );
+
   Widget _buildProduct() => GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 6,
         itemBuilder: (context, index) {
           final photo = _photos[index];
-          return Items(
-            imageUrl: photo['url'],
-            title: photo['title'],
-            number: photo['id'].toString(),
-          );
+          return isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Items(
+                  imageUrl: photo['url'],
+                  title: photo['title'],
+                  number: photo['id'].toString(),
+                );
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
