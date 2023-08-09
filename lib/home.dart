@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) => Shimmer.fromColors(
             baseColor: Colors.black54,
             highlightColor: Colors.black12,
-            direction: ShimmerDirection.ttb,
+            direction: ShimmerDirection.ttb, //added direction
             period: const Duration(milliseconds: 900), //added period
             child: const Items()),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
