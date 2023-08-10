@@ -34,7 +34,7 @@ class Items extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Text(
-          '₦2,000.00',
+          'Cost',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
       ],

@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
             baseColor: Colors.black54,
             highlightColor: Colors.black12,
             direction: ShimmerDirection.ttb,
-            period: const Duration(milliseconds: 900), // added period
+            period: const Duration(milliseconds: 900),
             child: const Items()),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
